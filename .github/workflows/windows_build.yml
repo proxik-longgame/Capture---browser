@@ -19,7 +19,7 @@ jobs:
 
       - name: Build App
         run: |
-          mkdir build
+          if (!(Test-Path build)) { New-Item -ItemType Directory -Path build }
           cd build
           qmake ..
           nmake
