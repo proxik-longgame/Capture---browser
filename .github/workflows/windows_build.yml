@@ -1,0 +1,35 @@
+name: Build Windows Browser
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.8.0' 
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2022_64'
+          modules: 'qtwebengine'
+
+      - name: Build App
+        run: |
+          mkdir build
+          cd build
+          qmake ..
+          nmake
+
+      - name: Deploy (Collect DLLs and Cookie Manager)
+        run: |
+          windeployqt --webengine --release build/release/Capture.exe
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows-Browser-Portable
+          path: build/release/

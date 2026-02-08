@@ -2,7 +2,6 @@
 #include <QWebEngineProfile>
 #include <QStandardPaths>
 #include <QDir>
-#include <QUuid>
 #include "core/browser.h"
 
 int main(int argc, char *argv[]) {
@@ -12,15 +11,11 @@ int main(int argc, char *argv[]) {
 
     QWebEngineProfile *p = QWebEngineProfile::defaultProfile();
     
-    QString appData = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-    
-    // Using a fixed folder name instead of random ensures "Normal Save" persists across restarts
-    QString storagePath = appData + "/CaptureData/storage";
+    QString path = QApplication::applicationDirPath() + "/user_data";
+    QDir().mkpath(path);
 
-    QDir().mkpath(storagePath);
-
-    p->setPersistentStoragePath(storagePath);
-    p->setCachePath(appData + "/CaptureData/cache");
+    p->setPersistentStoragePath(path + "/storage");
+    p->setCachePath(path + "/cache");
     p->setPersistentCookiesPolicy(QWebEngineProfile::ForcePersistentCookies);
 
     Browser w;
