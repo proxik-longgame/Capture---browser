@@ -19,9 +19,12 @@ jobs:
 
       - name: Set up MSVC
         uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
 
       - name: Build App
         run: |
+          $env:PATH = "${{ env.Qt6_DIR }}\bin;" + $env:PATH
           if (!(Test-Path build)) { New-Item -ItemType Directory -Path build }
           cd build
           qmake ..
@@ -30,6 +33,7 @@ jobs:
 
       - name: Deploy (Collect DLLs and Cookie Manager)
         run: |
+          $env:PATH = "${{ env.Qt6_DIR }}\bin;" + $env:PATH
           windeployqt --webengine --release build/release/Capture.exe
         shell: pwsh
 
