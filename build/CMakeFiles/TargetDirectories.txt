@@ -1,0 +1,5 @@
+/home/proxik/Документы/Browser/build/CMakeFiles/Capture.dir
+/home/proxik/Документы/Browser/build/CMakeFiles/edit_cache.dir
+/home/proxik/Документы/Browser/build/CMakeFiles/rebuild_cache.dir
+/home/proxik/Документы/Browser/build/CMakeFiles/Capture_autogen_timestamp_deps.dir
+/home/proxik/Документы/Browser/build/CMakeFiles/Capture_autogen.dir
