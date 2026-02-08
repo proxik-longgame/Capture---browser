@@ -25,7 +25,7 @@ jobs:
           if (!(Test-Path build)) { New-Item -ItemType Directory -Path build }
           cd build
           qmake ..
-          make
+          nmake
         shell: pwsh
 
       - name: Deploy (Collect DLLs and Cookie Manager)
